@@ -1,0 +1,61 @@
+#! /bin/bash
+#
+
+# $Author$
+# $Date$
+# $HeadURL$
+# $Revision$
+
+#Compare to string hello, if true, print username to terminal.
+while ((1==1))
+do
+
+#Enter a command 
+read -p "Enter a command: " userCommand
+
+    if [[ $userCommand == hello ]]
+    then
+        echo Hello $USER
+    
+    elif [[ $userCommand == quit ]]
+    then
+        echo Goodbye
+        exit 0
+    
+    elif [[ $userCommand == compile ]] 
+    then
+        
+        for File in *.c
+        do
+            oVersion=$(echo $File | cut -d'.' -f1)
+            gcc -Wall -Werror ${File} -o ${oVersion}.o
+             if (($? == 0 ))
+             then
+                 echo Compilation succeded for: ${File}
+             else
+                 echo Compilation failed for: ${File}
+             fi
+        done
+    
+    elif [[ $userCommand == run ]] 
+    then 
+        read -p "Enter filename: " filename
+        read -p "Enter arguments: " arguments
+        if [[ ! -x $filename ]] || [[ ! -e $filename ]]
+        then
+            echo Invalid filename, or does not exist 
+        else
+            "./"${filename} ${arguments}
+        fi
+    
+    else
+        echo Error: unrecognized input
+    
+    fi
+    echo 
+done
+exit 0
+
+
+
+

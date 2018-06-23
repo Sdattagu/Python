@@ -1,0 +1,23 @@
+#! /bin/bash
+#
+
+# $Author$
+# $Date$
+# $HeadURL$
+# $Revision$
+
+#Sums all values passed and prints the sum.
+#Assumes at least two values will be passed on the command line.
+#Assumes that all passed in values are integers.
+
+sum=0 
+num_args=$#
+
+while (( $#!=0 ))
+do
+    ((sum=sum+$1))
+    shift
+done
+
+echo "${sum}"
+exit 0
